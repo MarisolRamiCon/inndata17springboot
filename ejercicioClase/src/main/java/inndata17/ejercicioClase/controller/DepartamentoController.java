@@ -4,10 +4,7 @@ import inndata17.ejercicioClase.entity.Departamento;
 import inndata17.ejercicioClase.service.impl.DepartamentoService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +26,19 @@ public class DepartamentoController {
     public Optional<Departamento> readById(@PathVariable Integer id){
         return departamentoService.ReadById(id);
     }
-
+    /*Para diferenciar el metodo create es post y el metodo update es put*/
+    @PostMapping("departamentos")
+    public Departamento create(@RequestBody Departamento departamento){
+        return departamentoService.create(departamento);
+    }
+    //Para el metodo actualizar
+    @PutMapping("/departamentos")
+    public Departamento update(@RequestBody Departamento departamento){
+        return departamentoService.update(departamento);
+    }
+    @DeleteMapping("/departamentos/{id}")
+    public String delete(@PathVariable Integer id){
+        return departamentoService.deleteById(id);
+    }
 
 }

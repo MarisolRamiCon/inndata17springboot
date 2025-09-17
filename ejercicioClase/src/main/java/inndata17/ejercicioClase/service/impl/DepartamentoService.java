@@ -23,4 +23,20 @@ public class DepartamentoService implements IDepartamentoService {
     public Optional<Departamento> ReadById(Integer id) {
         return departamentoRepository.findById(id);
     }
+
+    @Override
+    public Departamento create(Departamento departamento) {
+        return departamentoRepository.save(departamento);
+    }
+
+    @Override
+    public Departamento update(Departamento departamento) {
+        return departamentoRepository.save(departamento);
+    }
+
+    @Override
+    public String deleteById(Integer id) {
+        departamentoRepository.deleteById(id);
+        return "Departamento borrado";
+    }
 }
