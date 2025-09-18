@@ -12,4 +12,6 @@ public interface IDepartamentoService {
     public Departamento create(Departamento departamento);
     public Departamento update(Departamento departamento);
     public String deleteById(Integer id);
+    public List<Departamento> precioMayor(Double precio);
+    public List<Departamento> precioM2(Integer m2, Double precio);
 }

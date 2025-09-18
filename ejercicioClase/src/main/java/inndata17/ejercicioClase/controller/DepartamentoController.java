@@ -27,7 +27,7 @@ public class DepartamentoController {
         return departamentoService.ReadById(id);
     }
     /*Para diferenciar el metodo create es post y el metodo update es put*/
-    @PostMapping("departamentos")
+    @PostMapping("/departamentos")
     public Departamento create(@RequestBody Departamento departamento){
         return departamentoService.create(departamento);
     }
@@ -39,6 +39,15 @@ public class DepartamentoController {
     @DeleteMapping("/departamentos/{id}")
     public String delete(@PathVariable Integer id){
         return departamentoService.deleteById(id);
+    }
+    @GetMapping("/precioMayor")
+    public List<Departamento> precioMayor(@PathParam("precio") Double precio){
+        return departamentoService.precioMayor(precio);
+    }
+
+    @GetMapping("/m2Precio")
+    public List<Departamento> m2Precio(@PathParam("m2") Integer m2,@PathParam("precio")Double precio){
+        return departamentoService.precioM2(m2,precio);
     }
 
 }
