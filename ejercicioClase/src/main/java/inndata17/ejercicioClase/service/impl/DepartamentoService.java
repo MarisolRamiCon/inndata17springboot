@@ -56,4 +56,8 @@ public class DepartamentoService implements IDepartamentoService {
     public List<Departamento> precioM2(Integer m2, Double precio) {
         return departamentoRepository.m2AndPrecio(m2, precio).stream().filter(depa->depa.getActivo()).toList();
     }
+
+    public Double suma(Double num1, Double num2){
+        return num1+num2;
+    }
 }
