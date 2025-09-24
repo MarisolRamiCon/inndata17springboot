@@ -11,11 +11,16 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class DepartamentoServiceTest {
+    Departamento d1= new Departamento(1,200,500,true);
+    Departamento d2= new Departamento(2,300,800,false);
+    Departamento d3= new Departamento(3,20,300,true);
     @InjectMocks
     DepartamentoService departamentoService;
 
@@ -35,6 +40,7 @@ class DepartamentoServiceTest {
     @BeforeEach
     void setUp() {
         System.out.println("Procesando Metodo Before");
+
     }
 
     @AfterEach
@@ -49,5 +55,22 @@ class DepartamentoServiceTest {
         departamento.setActivo(false);
         departamentoRepository.save(departamento);
         assertEquals("Departamento borrado",departamentoService.deleteById(1));
+    }
+
+    @Test
+    void deleteByIdElse() {
+        Departamento departamento= new Departamento(1,20,500,true);
+        Mockito.when(departamentoRepository.findById(2)).thenReturn(Optional.empty());
+        assertEquals("Departamento no encontrado", departamentoService.deleteById(2));
+    }
+
+    @Test
+    void readAll() {
+        List<Departamento> departamentos= new ArrayList<>();
+        departamentos.add(d1);
+        departamentos.add(d3);
+        Mockito.when(departamentoRepository.findAll()).thenReturn(departamentos);
+        List<Departamento> resultado = departamentoService.ReadAll();
+        assertEquals(resultado,departamentos);
     }
 }
